@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctq1qqbayfdk3"]
+
+[ext_resource type="Material" uid="uid://be5gkw16js445" path="res://Units/Blobs/blob_material.tres" id="1_7s5o1"]
+[ext_resource type="Texture2D" uid="uid://cmhcljsakraeu" path="res://Units/Blobs/grid.png" id="2_gdncr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1sswb"]
+size = Vector3(1.2, 2.765, 1.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i5lf1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8usrn"]
+albedo_texture = ExtResource("2_gdncr")
+
+[sub_resource type="BoxMesh" id="BoxMesh_unqd7"]
+lightmap_size_hint = Vector2i(14, 21)
+size = Vector3(0.1, 10, 10)
+
+[node name="Blob" type="Node3D"]
+
+[node name="BlobMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.00167, -0.0101488, 0.00520066, 0.010169, 1.00168, -0.0038827, -0.00516102, 0.00393524, 1.00172, 0, 0.696756, 0)
+mesh = SubResource("BoxMesh_1sswb")
+surface_material_override/0 = ExtResource("1_7s5o1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 3.74408e-08, -7.89996e-08, 0, 0.90365, 0.428273, 8.74228e-08, 0.428273, -0.90365, 0, 1.37726, -4.12029)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40064, 0.510237, 0.977245)
+visible = false
+light_specular = 16.0
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.0958, 0, 0, 0, 1, 0, 0, 0, 3.4, 0.703016, -1.26217, 0)
+mesh = SubResource("PlaneMesh_i5lf1")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.147607, 3.66004, 3.2642)
+material_override = SubResource("StandardMaterial3D_8usrn")
+mesh = SubResource("BoxMesh_unqd7")
