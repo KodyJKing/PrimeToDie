@@ -1,19 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctq1qqbayfdk3"]
+[gd_scene load_steps=9 format=3 uid="uid://ctq1qqbayfdk3"]
 
 [ext_resource type="Material" uid="uid://be5gkw16js445" path="res://Units/Blobs/blob_material.tres" id="1_7s5o1"]
+[ext_resource type="Environment" uid="uid://bytnanhbn3v33" path="res://Units/Blobs/new_environment.tres" id="2_0e6iw"]
 [ext_resource type="Texture2D" uid="uid://cmhcljsakraeu" path="res://Units/Blobs/grid.png" id="2_gdncr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1sswb"]
 size = Vector3(1.2, 2.765, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lv52q"]
+albedo_texture = ExtResource("2_gdncr")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i5lf1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8usrn"]
 albedo_texture = ExtResource("2_gdncr")
 
-[sub_resource type="BoxMesh" id="BoxMesh_unqd7"]
-lightmap_size_hint = Vector2i(14, 21)
-size = Vector3(0.1, 10, 10)
+[sub_resource type="PlaneMesh" id="PlaneMesh_0vhnx"]
 
 [node name="Blob" type="Node3D"]
 
@@ -22,20 +24,37 @@ transform = Transform3D(1.00167, -0.0101488, 0.00520066, 0.010169, 1.00168, -0.0
 mesh = SubResource("BoxMesh_1sswb")
 surface_material_override/0 = ExtResource("1_7s5o1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 3.74408e-08, -7.89996e-08, 0, 0.90365, 0.428273, 8.74228e-08, 0.428273, -0.90365, 0, 1.37726, -4.12029)
-visible = false
+[node name="Test Env" type="Node" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="Test Env"]
+transform = Transform3D(-0.924732, -0.0880653, 0.37029, 2.50546e-08, 0.972865, 0.231374, -0.380618, 0.213959, -0.899639, 0.429225, 0.645854, -0.915682)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Test Env"]
+transform = Transform3D(-0.779418, 0.25134, 0.573878, 0.589247, -0.0170821, 0.807773, 0.212829, 0.967748, -0.134787, -1.27124, 8.69259, -2.23733)
+light_color = Color(1, 1, 0.988235, 1)
+light_energy = 3.09
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Test Env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40064, 0.510237, 0.977245)
 visible = false
 light_specular = 16.0
+metadata/_edit_lock_ = true
 
-[node name="FloorMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(12.0958, 0, 0, 0, 1, 0, 0, 0, 3.4, 0.703016, -1.26217, 0)
+[node name="FloorMesh" type="MeshInstance3D" parent="Test Env"]
+transform = Transform3D(-8.74228e-07, 0, 20, 0, 1, 0, -20, 0, -8.74228e-07, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_lv52q")
 mesh = SubResource("PlaneMesh_i5lf1")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
 
-[node name="WallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.147607, 3.66004, 3.2642)
+[node name="WallMesh" type="MeshInstance3D" parent="Test Env"]
+transform = Transform3D(-20, 4.37114e-08, 1.74846e-06, -1.74846e-06, 4.37114e-08, -20, -8.74228e-07, -1, -8.74228e-07, 0, -1, 4.178)
 material_override = SubResource("StandardMaterial3D_8usrn")
-mesh = SubResource("BoxMesh_unqd7")
+mesh = SubResource("PlaneMesh_0vhnx")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Test Env"]
+environment = ExtResource("2_0e6iw")

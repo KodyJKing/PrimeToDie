@@ -2,9 +2,14 @@ shader_type spatial;
 render_mode depth_prepass_alpha, shadows_disabled;
 //render_mode depth_prepass_alpha;
 
-uniform sampler2D noise;
 uniform sampler2D noiseNorm;
-uniform vec3 blobColor : source_color;
+uniform vec3 blobColor : source_color = vec3(.15, 0.0, .15);
+
+uniform float alphaStepStart = 0.0;
+uniform float alphaStepEnd = 0.3;
+
+uniform float iridescenceSaturation : hint_range(0.0, 1.0) = 1.0;
+uniform sampler2D iridescenceNoise;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 
@@ -47,9 +52,6 @@ float trace(vec3 ro, vec3 rd, float t, float sgn) {
     return -1.0;
 }
 
-//void vertex() {	
-//}
-
 vec3 triplanar(vec3 p, vec3 n, sampler2D tex) {
 	vec3 nx = vec3(1.0, 0.0, 0.0);
 	vec3 ny = nx.yxy;
@@ -64,6 +66,14 @@ vec3 triplanar(vec3 p, vec3 n, sampler2D tex) {
 	return (cx * kx + cy * ky + cz * kz) / k;
 }
 
+float luma(vec3 color) {
+  return dot(color, vec3(0.299, 0.587, 0.114));
+}
+
+vec3 saturate(vec3 color, float s) {
+	return mix(vec3(luma(color)), color, s);
+}
+
 void fragment() {
 	float t = 0.0; // Make a uniform for this.
 	vec3 wFwd = (INV_VIEW_MATRIX * vec4(-VIEW, 0.0)).xyz;
@@ -76,50 +86,41 @@ void fragment() {
 		DEPTH = 1.0;
 		ALPHA = 0.0;
 	} else {
+		CLEARCOAT = 2.0;
+		CLEARCOAT_ROUGHNESS = .01;
+		ROUGHNESS = 0.1;
+		
 		vec3 wHit = wPos + d * wFwd;
 		vec3 wNorm = normalize(mapNormal(wHit, t));
 		vec3 vNorm = (VIEW_MATRIX * vec4(wNorm, 0.0)).xyz;
-		
 		NORMAL = vNorm;
 		//ALBEDO = (vNorm * .5 + .5) * 1.0;
 		
+        vec4 clipPos = (PROJECTION_MATRIX * VIEW_MATRIX * vec4(wHit, 1.0));
+		float depth = clipPos.z / clipPos.w;
+		DEPTH = depth;
+		
 		float thickness = max(trace(wHit + wFwd * .1, wFwd, t, -1.0), .1);
-		float alpha = smoothstep(-.2, .5, thickness);
+		float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness);
 		
 		vec3 s0 = wHit * .25 + vec3(sin(TIME * .5) * .05, TIME * 0.05, cos(TIME * .5) * .05);
-		ALBEDO = triplanar(s0, wNorm, noise) * .015 + blobColor;
-		
-		CLEARCOAT = 2.0;
-		CLEARCOAT_ROUGHNESS = .01;
-		ROUGHNESS = 0.01;
+		float blobLuma = luma(blobColor);
+		float iridescence = blobLuma * .8 + .01;
+		vec3 iridescenceCol = saturate(triplanar(s0, wNorm, iridescenceNoise), iridescenceSaturation);
+		//ALBEDO = iridescenceCol * iridescence + blobColor;
+		ALBEDO = mix(blobColor, iridescenceCol, iridescence);
 		
 		vec3 s1 = wHit + vec3(.0, TIME * .1, .0);
 		vec3 s2 = wHit + vec3(TIME * .01, TIME * .05, .0);
 		NORMAL_MAP = mix(triplanar(s1, wNorm, noiseNorm), triplanar(s2, wNorm, noiseNorm), .5);
 		NORMAL_MAP_DEPTH = 1.0;
 		
-		vec4 clipPos = (PROJECTION_MATRIX * VIEW_MATRIX * vec4(wHit, 1.0));
-		float depth = clipPos.z / clipPos.w;
-		DEPTH = depth;
-		//ALBEDO = vec3(depth);
-		
-		vec3 wBackNorm = mapNormal(wHit + wFwd * thickness, t);
-		vec3 vBackNorm = (VIEW_MATRIX * vec4(wBackNorm, 0.0)).xyz;
-		vec2 uv = SCREEN_UV + vBackNorm.xy / vBackNorm.z * .01;
-		//ALBEDO += texture(SCREEN_TEXTURE, uv).xyz;
-		ALBEDO = mix(texture(SCREEN_TEXTURE, uv).xyz, ALBEDO, alpha);
+		if (alpha < .9) {
+			vec3 wBackNorm = mapNormal(wHit + wFwd * thickness, t);
+			vec3 vBackNorm = (VIEW_MATRIX * vec4(wBackNorm, 0.0)).xyz;
+			vec2 uv = SCREEN_UV + vBackNorm.xy / vBackNorm.z * .01;
+			ALBEDO = mix(texture(SCREEN_TEXTURE, uv).xyz, ALBEDO, alpha);
+			//ALBEDO = vec3(1., 0., 0.);
+		}
 	}
 }
-
-//uniform sampler2D DEPTH_TEXTURE: hint_depth_texture, filter_linear_mipmap;
-//void light() {
-	////DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * LIGHT_COLOR;
-	////vec2 SCREEN_UV = FRAGCOORD.xy / VIEWPORT_SIZE;
-	////vec3 wEye = vec3(0.0);
-	////wEye.x = MODEL_MATRIX[0][3];
-	////wEye.y = MODEL_MATRIX[1][3];
-	////wEye.z = MODEL_MATRIX[2][3];
-	////float depth = FRAGCOORD.z;
-	////depth = depth * 2.0 - 1.0;
-	////DIFFUSE_LIGHT = vec3(depth * 0.1);
-//}

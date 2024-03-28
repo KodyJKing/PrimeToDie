@@ -1,4 +1,11 @@
-[gd_resource type="Environment" format=3 uid="uid://bytnanhbn3v33"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://bytnanhbn3v33"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uifdh"]
+
+[sub_resource type="Sky" id="Sky_yijkq"]
+sky_material = SubResource("ProceduralSkyMaterial_uifdh")
 
 [resource]
-ssao_enabled = true
+background_mode = 2
+sky = SubResource("Sky_yijkq")
+ambient_light_source = 3
