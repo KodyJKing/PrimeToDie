@@ -1,5 +1,6 @@
 shader_type spatial;
-render_mode depth_prepass_alpha, shadows_disabled;
+//render_mode depth_prepass_alpha, shadows_disabled;
+render_mode shadows_disabled, depth_draw_always;
 //render_mode depth_prepass_alpha;
 
 uniform sampler2D noiseNorm;
@@ -7,11 +8,22 @@ uniform vec3 blobColor : source_color = vec3(.15, 0.0, .15);
 
 uniform float alphaStepStart = 0.0;
 uniform float alphaStepEnd = 0.3;
+uniform float alphaCoef = 1.0;
+uniform float refractionAlphaCutoff = 0.95;
+uniform float refractionLOD = 1.0;
+
+uniform float normalDepth = 1.0;
 
 uniform float iridescenceSaturation : hint_range(0.0, 1.0) = 1.0;
+uniform float iridescenceCoef = 1.0;
 uniform sampler2D iridescenceNoise;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+uniform int numBlobs;
+uniform vec4[20] blobs;
+
+const float LARGE = 9e+9;
 
 float sphereSdf(vec3 p, vec3 pos, float r) {
 	return length(pos - p) - r;
@@ -23,10 +35,34 @@ float smin(float a, float b, float k) {
     return mix(b, a, h) - k * h * (1.0 - h);
 }
 
+vec3 min3(vec3 prev, float val) {
+	if (val < prev.x)
+		prev.x = val;
+	else if (val < prev.y)
+		prev.y = val;
+	else if (val < prev.z)
+		prev.z = val;
+	return prev;
+}
+
 float mapSdf(vec3 p, float t) {
-	float s1 = sphereSdf( p, vec3(.0, .0 ,.0), .5 );
-	float s2 = sphereSdf( p, vec3(.0, 1.125 + sin(TIME) * .25 ,.0), .5);
-	return smin(s1, s2, 0.5 + cos(TIME * 10.0) * .05 );
+	// Melding number
+	float k = 0.5 + cos(TIME * 10.0) * .025;
+	
+	float d1 = sphereSdf( p, vec3(.0, .0 ,.0), .5 );
+	float d2 = sphereSdf( p, vec3(.0, 1.125 + sin(TIME) * .25 ,.0), .25);
+	
+	float d = smin(d1, d2, k);
+	
+	for (int i = 0; i < numBlobs; i++) {
+		vec4 blob = blobs[i];
+		d = smin(d, sphereSdf(p, blob.xyz, blob.w), k);
+	}
+	
+	return d;
+	
+	// Fancier melding with top to bottom waves and circular vibration:
+	//return smin(s1, s2, 0.5 + cos(TIME * 20.0 + p.y * 5.0 + p.x * 5.0 * cos(TIME) + p.y * 5.0 * sin(TIME)) * .05 );
 }
 
 vec3 mapNormal(vec3 p, float t) {
@@ -86,9 +122,9 @@ void fragment() {
 		DEPTH = 1.0;
 		ALPHA = 0.0;
 	} else {
-		CLEARCOAT = 2.0;
+		CLEARCOAT = 2000.0;
 		CLEARCOAT_ROUGHNESS = .01;
-		ROUGHNESS = 0.1;
+		ROUGHNESS = 0.2;
 		
 		vec3 wHit = wPos + d * wFwd;
 		vec3 wNorm = normalize(mapNormal(wHit, t));
@@ -101,25 +137,28 @@ void fragment() {
 		DEPTH = depth;
 		
 		float thickness = max(trace(wHit + wFwd * .1, wFwd, t, -1.0), .1);
-		float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness);
+		float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness) * alphaCoef;
 		
 		vec3 s0 = wHit * .25 + vec3(sin(TIME * .5) * .05, TIME * 0.05, cos(TIME * .5) * .05);
 		float blobLuma = luma(blobColor);
 		float iridescence = blobLuma * .8 + .01;
 		vec3 iridescenceCol = saturate(triplanar(s0, wNorm, iridescenceNoise), iridescenceSaturation);
-		//ALBEDO = iridescenceCol * iridescence + blobColor;
-		ALBEDO = mix(blobColor, iridescenceCol, iridescence);
+		ALBEDO = mix(blobColor, iridescenceCol, iridescence * .25);
+		EMISSION = iridescenceCol * iridescenceCoef * iridescence * .5;
 		
 		vec3 s1 = wHit + vec3(.0, TIME * .1, .0);
 		vec3 s2 = wHit + vec3(TIME * .01, TIME * .05, .0);
 		NORMAL_MAP = mix(triplanar(s1, wNorm, noiseNorm), triplanar(s2, wNorm, noiseNorm), .5);
-		NORMAL_MAP_DEPTH = 1.0;
+		NORMAL_MAP_DEPTH = normalDepth;
 		
-		if (alpha < .9) {
-			vec3 wBackNorm = mapNormal(wHit + wFwd * thickness, t);
+		if (alpha < refractionAlphaCutoff) {
+			vec3 wBack = wHit + wFwd * thickness;
+			vec3 wBackNorm = mapNormal(wBack, t);
+			wBackNorm = refract(wFwd, -wBackNorm, .1);
 			vec3 vBackNorm = (VIEW_MATRIX * vec4(wBackNorm, 0.0)).xyz;
-			vec2 uv = SCREEN_UV + vBackNorm.xy / vBackNorm.z * .01;
-			ALBEDO = mix(texture(SCREEN_TEXTURE, uv).xyz, ALBEDO, alpha);
+			vec2 uv = SCREEN_UV + vBackNorm.xy / max(vBackNorm.z, 0.1) * .01;
+			//ALBEDO = mix(texture(SCREEN_TEXTURE, uv).xyz, ALBEDO, alpha);
+			ALBEDO = mix(textureLod(SCREEN_TEXTURE, uv, refractionLOD).xyz, ALBEDO, alpha);
 			//ALBEDO = vec3(1., 0., 0.);
 		}
 	}

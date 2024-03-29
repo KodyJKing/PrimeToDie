@@ -8,4 +8,11 @@ sky_material = SubResource("ProceduralSkyMaterial_uifdh")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_yijkq")
-ambient_light_source = 3
+ambient_light_source = 1
+reflected_light_source = 2
+tonemap_mode = 3
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 0.1
+fog_light_color = Color(0.533333, 0.576471, 0.380392, 1)
+fog_density = 0.112

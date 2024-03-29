@@ -9,10 +9,17 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_kpq3j")
-shader_parameter/blobColor = Color(0.15, 0, 0.15, 1)
-shader_parameter/alphaStepStart = -0.1
-shader_parameter/alphaStepEnd = 0.15
-shader_parameter/iridescenceSaturation = 0.61
+shader_parameter/blobColor = Color(0.113725, 0.388235, 0, 1)
+shader_parameter/alphaStepStart = -5.465
+shader_parameter/alphaStepEnd = 0.91
+shader_parameter/alphaCoef = 0.995
+shader_parameter/refractionAlphaCutoff = 0.999
+shader_parameter/refractionLOD = 1.0
+shader_parameter/normalDepth = 0.5
+shader_parameter/iridescenceSaturation = 1.0
+shader_parameter/iridescenceCoef = 2.0
+shader_parameter/numBlobs = null
+shader_parameter/blobs = null
 shader_parameter/noiseNorm = ExtResource("3_5kxal")
 shader_parameter/iridescenceNoise = ExtResource("2_lgsea")
 script = SubResource("GDScript_2iuxq")

@@ -1,0 +1,14 @@
+[gd_resource type="NoiseTexture3D" load_steps=3 format=3 uid="uid://b5mdthfdx3iee"]
+
+[sub_resource type="Gradient" id="Gradient_ani0p"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bitgy"]
+frequency = 0.015
+domain_warp_enabled = true
+domain_warp_amplitude = 15.755
+domain_warp_fractal_gain = 0.2
+
+[resource]
+seamless = true
+color_ramp = SubResource("Gradient_ani0p")
+noise = SubResource("FastNoiseLite_bitgy")

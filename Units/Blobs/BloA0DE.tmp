@@ -1,17 +1,18 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctq1qqbayfdk3"]
 
 [ext_resource type="Material" uid="uid://ok6rk1wvoj24" path="res://Units/Blobs/blob_material_2.tres" id="1_frbgt"]
+[ext_resource type="Script" path="res://Units/Blobs/Blob.gd" id="1_opqer"]
 [ext_resource type="Environment" uid="uid://bytnanhbn3v33" path="res://Units/Blobs/test_env.tres" id="2_0e6iw"]
 [ext_resource type="Script" path="res://Units/Blobs/BlobCamMesh.gd" id="2_bbjpm"]
 [ext_resource type="Texture2D" uid="uid://cmhcljsakraeu" path="res://Units/Blobs/grid.png" id="2_gdncr"]
 
-[sub_resource type="GDScript" id="GDScript_6uhkg"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_1sswb"]
-size = Vector3(8, 5, 5)
+size = Vector3(20, 5, 5)
 
 [sub_resource type="SphereMesh" id="SphereMesh_2aivb"]
 flip_faces = true
+radius = 0.25
+height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lv52q"]
 albedo_texture = ExtResource("2_gdncr")
@@ -24,8 +25,7 @@ albedo_texture = ExtResource("2_gdncr")
 [sub_resource type="PlaneMesh" id="PlaneMesh_0vhnx"]
 
 [node name="Blob" type="Node3D"]
-script = SubResource("GDScript_6uhkg")
-metadata/_edit_lock_ = true
+script = ExtResource("1_opqer")
 
 [node name="BlobMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.00167, -0.0101488, 0.00520066, 0.010169, 1.00168, -0.0038827, -0.00516102, 0.00393524, 1.00172, 0, 0.696756, 0)
@@ -39,8 +39,7 @@ surface_material_override/0 = ExtResource("1_frbgt")
 transform = Transform3D(-0.924732, -0.0880651, 0.37029, 2.50546e-08, 0.972865, 0.231374, -0.380618, 0.213959, -0.89964, 0.642579, 1.12336, -2.99909)
 
 [node name="BlobCamMesh" type="MeshInstance3D" parent="Test Env/Camera3D"]
-transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.562581, 0.780078, -3.24701)
-top_level = true
+transform = Transform3D(0.999997, -5.96046e-08, 5.96046e-08, -2.45869e-07, 0.999999, -2.98023e-07, 1.78814e-07, 0, 0.999999, 1.93766, 1.92322, 3.5056)
 mesh = SubResource("SphereMesh_2aivb")
 surface_material_override/0 = ExtResource("1_frbgt")
 script = ExtResource("2_bbjpm")

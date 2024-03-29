@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ok6rk1wvoj24"]
+
+[ext_resource type="Shader" path="res://Units/Blobs/blob_shader.gdshader" id="1_1fdy6"]
+
+[sub_resource type="GDScript" id="GDScript_2iuxq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1fdy6")
+script = SubResource("GDScript_2iuxq")
