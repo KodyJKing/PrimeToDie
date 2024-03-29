@@ -334,7 +334,7 @@ transform = Transform3D(0.999999, 1.58943e-08, -1.25729e-08, -1.66856e-08, 0.999
 transform = Transform3D(-0.924732, -0.199229, 0.324312, 1.49012e-08, 0.852065, 0.523435, -0.380618, 0.484038, -0.787932, 3.08271, 4.37925, -5.97533)
 
 [node name="BlobCamMesh" type="MeshInstance3D" parent="Test Env/Camera3D"]
-transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.14621, 1.7301, -9.94825)
+transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 5.48104, 12.1604, -20.2175)
 top_level = true
 mesh = SubResource("SphereMesh_2aivb")
 surface_material_override/0 = ExtResource("1_frbgt")
@@ -356,6 +356,7 @@ light_specular = 16.0
 environment = ExtResource("2_0e6iw")
 
 [node name="Geometry" type="Node3D" parent="Test Env"]
+metadata/_edit_lock_ = true
 
 [node name="FloorMesh" type="MeshInstance3D" parent="Test Env/Geometry"]
 transform = Transform3D(-8.74228e-07, 0, 20, 0, 20, 0, -20, 0, -8.74228e-07, 0, 0, 0)
@@ -371,13 +372,27 @@ transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0.249481
 shape = SubResource("BoxShape3D_m02qs")
 
 [node name="WallMesh" type="MeshInstance3D" parent="Test Env/Geometry"]
-transform = Transform3D(-20, 4.37114e-08, 1.74846e-06, -1.74846e-06, 4.37114e-08, -20, -8.74228e-07, -1, -8.74228e-07, 0, 19, 20)
+transform = Transform3D(-20, 4.37114e-08, 1.74846e-06, -1.74846e-06, 4.37114e-08, -20, -8.74228e-07, -1, -8.74228e-07, 0, 20, 20)
 material_override = SubResource("StandardMaterial3D_8usrn")
 mesh = SubResource("PlaneMesh_0vhnx")
 skeleton = NodePath("../../..")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Test Env/Geometry/WallMesh"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Test Env/Geometry/WallMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 2.19749e-12, 1.7053e-13, 1, -1.75078e-11, -1.09943e-12, 2.22045e-16, 1, -0.00817871, 7.62939e-06, 0.0195923)
+shape = SubResource("BoxShape3D_j3xao")
+
+[node name="WallMesh2" type="MeshInstance3D" parent="Test Env/Geometry"]
+transform = Transform3D(1.74846e-06, 1, 1.74846e-06, 8.74228e-07, 8.7423e-08, -20, -20, 8.74228e-08, -8.74228e-07, -20, 20, 0)
+material_override = SubResource("StandardMaterial3D_8usrn")
+mesh = SubResource("PlaneMesh_0vhnx")
+skeleton = NodePath("../../../../..")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Test Env/Geometry/WallMesh2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Test Env/Geometry/WallMesh2/StaticBody3D"]
 transform = Transform3D(1, 0, 2.19749e-12, 1.7053e-13, 1, -1.75078e-11, -1.09943e-12, 2.22045e-16, 1, -0.00817871, 7.62939e-06, 0.0195923)
 shape = SubResource("BoxShape3D_j3xao")
