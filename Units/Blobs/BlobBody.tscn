@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvhyn4pgth2pf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t51q0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_84wxa"]
+radius = 0.25
+
+[node name="RigidBody3D" type="RigidBody3D"]
+transform = Transform3D(1, 2.86673e-09, -1.86265e-09, -2.663e-09, 1, 0, -2.79397e-09, 1.39698e-09, 1, 1.78814e-07, 2.8939, -1.49012e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 7.82165e-11, -9.31323e-10, -1.73532e-09, 1, 0, -1.86265e-09, 4.65661e-10, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_t51q0")
+skeleton = NodePath("")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 7.45786e-11, 0, -1.73532e-09, 1, 0, -4.65661e-10, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_84wxa")
+metadata/_edit_lock_ = true

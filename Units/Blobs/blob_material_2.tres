@@ -1,10 +1,28 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ok6rk1wvoj24"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ok6rk1wvoj24"]
 
 [ext_resource type="Shader" path="res://Units/Blobs/blob_shader.gdshader" id="1_1fdy6"]
+[ext_resource type="Texture2D" uid="uid://bxj4t2tpmn56r" path="res://Units/Blobs/iridescence_noise.tres" id="2_hur1b"]
+[ext_resource type="Texture2D" uid="uid://ddegmysrlevm3" path="res://Units/Blobs/normal_noise.tres" id="3_6vn1w"]
 
 [sub_resource type="GDScript" id="GDScript_2iuxq"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_1fdy6")
+shader_parameter/blobColor = Color(0.278, 0.443, 0.012, 1)
+shader_parameter/attenuationConstant = 2.0
+shader_parameter/alphaCoef = 1.0
+shader_parameter/refractionAlphaCutoff = 0.99
+shader_parameter/refractionLOD = 1.0
+shader_parameter/clearSkin = 0.25
+shader_parameter/normalDepth = 2.0
+shader_parameter/iridescenceSaturation = 1.0
+shader_parameter/iridescenceCoef = 2.0
+shader_parameter/floorHeight = 0.1
+shader_parameter/floorStickiness = 0.26
+shader_parameter/blobStickiness = 0.75
+shader_parameter/numBlobs = 2
+shader_parameter/blobs = PackedFloat32Array(1, 0.5, 0, 1, 1, 1.5, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/noiseNorm = ExtResource("3_6vn1w")
+shader_parameter/iridescenceNoise = ExtResource("2_hur1b")
 script = SubResource("GDScript_2iuxq")

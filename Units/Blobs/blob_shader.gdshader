@@ -4,13 +4,15 @@ render_mode shadows_disabled, depth_draw_always;
 //render_mode depth_prepass_alpha;
 
 uniform sampler2D noiseNorm;
-uniform vec3 blobColor : source_color = vec3(.15, 0.0, .15);
+uniform vec3 blobColor : source_color = vec3(.278, 0.443, .012);
 
-uniform float alphaStepStart = 0.0;
-uniform float alphaStepEnd = 0.3;
+//uniform float alphaStepStart = 0.0;
+//uniform float alphaStepEnd = 0.3;
+uniform float attenuationConstant = 2.0;
 uniform float alphaCoef = 1.0;
 uniform float refractionAlphaCutoff = 0.95;
 uniform float refractionLOD = 1.0;
+uniform float clearSkin = 0.01;
 
 uniform float normalDepth = 1.0;
 
@@ -18,10 +20,15 @@ uniform float iridescenceSaturation : hint_range(0.0, 1.0) = 1.0;
 uniform float iridescenceCoef = 1.0;
 uniform sampler2D iridescenceNoise;
 
+uniform float floorHeight = 0.0;
+uniform float floorStickiness = 1.0;
+
+uniform float blobStickiness = 0.75;
+
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 
 uniform int numBlobs;
-uniform vec4[20] blobs;
+uniform vec4[100] blobs;
 
 const float LARGE = 9e+9;
 
@@ -35,34 +42,24 @@ float smin(float a, float b, float k) {
     return mix(b, a, h) - k * h * (1.0 - h);
 }
 
-vec3 min3(vec3 prev, float val) {
-	if (val < prev.x)
-		prev.x = val;
-	else if (val < prev.y)
-		prev.y = val;
-	else if (val < prev.z)
-		prev.z = val;
-	return prev;
-}
-
 float mapSdf(vec3 p, float t) {
 	// Melding number
-	float k = 0.5 + cos(TIME * 10.0) * .025;
+	float k = blobStickiness + cos(TIME * 10.0 + p.y * 4.0) * .025;
 	
-	float d1 = sphereSdf( p, vec3(.0, .0 ,.0), .5 );
-	float d2 = sphereSdf( p, vec3(.0, 1.125 + sin(TIME) * .25 ,.0), .25);
+	//float d1 = sphereSdf( p, vec3(.0, .0 ,.0), .5 );
+	//float d2 = sphereSdf( p, vec3(.0, 1.125 + sin(TIME) * .25 ,.0), .25);
 	
-	float d = smin(d1, d2, k);
+	float d = LARGE; // smin(d1, d2, k);
 	
 	for (int i = 0; i < numBlobs; i++) {
 		vec4 blob = blobs[i];
 		d = smin(d, sphereSdf(p, blob.xyz, blob.w), k);
 	}
 	
-	return d;
+	float floorSdf = d > floorStickiness ? d : p.y - floorHeight;
+	d = smin(d, floorSdf, floorStickiness);
 	
-	// Fancier melding with top to bottom waves and circular vibration:
-	//return smin(s1, s2, 0.5 + cos(TIME * 20.0 + p.y * 5.0 + p.x * 5.0 * cos(TIME) + p.y * 5.0 * sin(TIME)) * .05 );
+	return d;
 }
 
 vec3 mapNormal(vec3 p, float t) {
@@ -77,7 +74,7 @@ vec3 mapNormal(vec3 p, float t) {
 }
 
 float trace(vec3 ro, vec3 rd, float t, float sgn) {
-    float epsilon = .01;
+    float epsilon = .001;
     float dist = .0;
 	float maxDist = 200.0;
     for(int i = 0; i < 500 && dist < maxDist; i++) {
@@ -107,7 +104,8 @@ float luma(vec3 color) {
 }
 
 vec3 saturate(vec3 color, float s) {
-	return mix(vec3(luma(color)), color, s);
+	float l = luma(color);
+	return mix(vec3(l), color, s);
 }
 
 void fragment() {
@@ -136,13 +134,17 @@ void fragment() {
 		float depth = clipPos.z / clipPos.w;
 		DEPTH = depth;
 		
-		float thickness = max(trace(wHit + wFwd * .1, wFwd, t, -1.0), .1);
-		float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness) * alphaCoef;
+		float thickness = max(trace(wHit + wFwd * clearSkin, wFwd, t, -1.0), .1);
+		float T = exp(-thickness * attenuationConstant);
+		float alpha = (1.0 - T) * alphaCoef;
+		//float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness) * alphaCoef;
 		
 		vec3 s0 = wHit * .25 + vec3(sin(TIME * .5) * .05, TIME * 0.05, cos(TIME * .5) * .05);
+		vec3 s02 = wHit * .25 + vec3(cos(TIME * .5) * .05, -TIME * 0.01, sin(TIME * .5) * .05);
 		float blobLuma = luma(blobColor);
 		float iridescence = blobLuma * .8 + .01;
-		vec3 iridescenceCol = saturate(triplanar(s0, wNorm, iridescenceNoise), iridescenceSaturation);
+		vec3 iridescenceCol = mix(triplanar(s0, wNorm, iridescenceNoise), triplanar(s02, wNorm, iridescenceNoise), 0.5);
+		iridescenceCol = saturate(iridescenceCol, iridescenceSaturation);
 		ALBEDO = mix(blobColor, iridescenceCol, iridescence * .25);
 		EMISSION = iridescenceCol * iridescenceCoef * iridescence * .5;
 		
