@@ -20,12 +20,13 @@ func _process(delta):
 			var d = p2 - p
 			var l = max(d.length(), 0.5)
 			var repel = 1.1 * d.normalized() / (l * l) * (s + 4.0)
-			var f = (d - repel) * 0.25
+			var attract = d / (l * l) * 4
+			var f = (attract - repel) * 0.25 * 1
 			body.apply_central_force(f)
 			body2.apply_central_force(-f)
 			
-			if randf() < 0.0001:
-				body.apply_central_impulse(Vector3(0, delta * 25, 0))
+			if randf() < 0.01:
+				body.apply_central_impulse(Vector3(0, delta * 2.5, 0))
 	
 	# Update material
 	var blobs = [] #PackedFloat32Array()

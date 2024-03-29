@@ -10,6 +10,8 @@ uniform vec3 blobColor : source_color = vec3(.278, 0.443, .012);
 //uniform float alphaStepEnd = 0.3;
 uniform float attenuationConstant = 2.0;
 uniform float alphaCoef = 1.0;
+uniform float minAlpha = 0.1;
+
 uniform float refractionAlphaCutoff = 0.95;
 uniform float refractionLOD = 1.0;
 uniform float clearSkin = 0.01;
@@ -53,11 +55,15 @@ float mapSdf(vec3 p, float t) {
 	
 	for (int i = 0; i < numBlobs; i++) {
 		vec4 blob = blobs[i];
-		d = smin(d, sphereSdf(p, blob.xyz, blob.w), k);
+		float sdf = sphereSdf(p, blob.xyz, blob.w);
+		if (sdf < 100.0)
+			d = smin(d, sdf, k);
 	}
 	
-	float floorSdf = d > floorStickiness ? d : p.y - floorHeight;
-	d = smin(d, floorSdf, floorStickiness);
+	float y = clamp(p.y, floorHeight - 0.01, floorHeight);
+	float floorSdf = abs(p.y - y);
+	if (d < floorStickiness)
+		d = smin(d, floorSdf, floorStickiness);
 	
 	return d;
 }
@@ -134,9 +140,9 @@ void fragment() {
 		float depth = clipPos.z / clipPos.w;
 		DEPTH = depth;
 		
-		float thickness = max(trace(wHit + wFwd * clearSkin, wFwd, t, -1.0), .1);
+		float thickness = max(trace(wHit + wFwd * clearSkin, wFwd, t, -1.0), 0.1);
 		float T = exp(-thickness * attenuationConstant);
-		float alpha = (1.0 - T) * alphaCoef;
+		float alpha = max((1.0 - T) * alphaCoef, minAlpha);
 		//float alpha = smoothstep(alphaStepStart, alphaStepEnd, thickness) * alphaCoef;
 		
 		vec3 s0 = wHit * .25 + vec3(sin(TIME * .5) * .05, TIME * 0.05, cos(TIME * .5) * .05);
