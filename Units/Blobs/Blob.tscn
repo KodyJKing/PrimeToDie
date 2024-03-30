@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://ctq1qqbayfdk3"]
 
+[ext_resource type="Material" uid="uid://ok6rk1wvoj24" path="res://Units/Blobs/blob_material_slime.tres" id="1_vjc21"]
 [ext_resource type="Environment" uid="uid://bytnanhbn3v33" path="res://Units/Blobs/test_env.tres" id="2_0e6iw"]
 [ext_resource type="Script" path="res://Units/Blobs/BlobCamMesh.gd" id="2_bbjpm"]
 [ext_resource type="Script" path="res://Units/Blobs/BlobMesh.gd" id="2_c6w8q"]
 [ext_resource type="Texture2D" uid="uid://cmhcljsakraeu" path="res://Units/Blobs/grid.png" id="2_gdncr"]
 [ext_resource type="PackedScene" uid="uid://bvhyn4pgth2pf" path="res://Units/Blobs/BlobBody.tscn" id="3_vtn7c"]
-[ext_resource type="Material" uid="uid://bcyoxfhily0e6" path="res://Units/Blobs/blob_material_oil.tres" id="4_g78bk"]
 
 [sub_resource type="GDScript" id="GDScript_6uhkg"]
 
@@ -40,7 +40,7 @@ metadata/_edit_lock_ = true
 [node name="BlobMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.00167, -0.0101488, 0.00520066, 0.010169, 1.00168, -0.0038827, -0.00516102, 0.00393524, 1.00172, 0.742514, -0.25545, 0.068161)
 mesh = SubResource("CylinderMesh_yk82o")
-surface_material_override/0 = ExtResource("4_g78bk")
+surface_material_override/0 = ExtResource("1_vjc21")
 script = ExtResource("2_c6w8q")
 
 [node name="BlobBody" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
@@ -333,11 +333,11 @@ transform = Transform3D(0.999999, 1.58943e-08, -1.25729e-08, -1.66856e-08, 0.999
 transform = Transform3D(-0.924732, -0.199229, 0.324312, 1.49012e-08, 0.852065, 0.523435, -0.380618, 0.484038, -0.787932, 3.08271, 4.37925, -5.97533)
 
 [node name="BlobCamMesh" type="MeshInstance3D" parent="Test Env/Camera3D"]
-transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.196012, 2.36419, -3.5056)
+transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.2782, 5.49815, -5.69578)
 top_level = true
 visible = false
 mesh = SubResource("SphereMesh_2aivb")
-surface_material_override/0 = ExtResource("4_g78bk")
+surface_material_override/0 = ExtResource("1_vjc21")
 script = ExtResource("2_bbjpm")
 metadata/_edit_lock_ = true
 

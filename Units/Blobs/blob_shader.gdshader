@@ -12,9 +12,11 @@ uniform float attenuationConstant = 2.0;
 uniform float alphaCoef = 1.0;
 uniform float minAlpha = 0.1;
 
+uniform float indexOfRefraction = 1.5;
 uniform float refractionAlphaCutoff = 0.95;
 uniform float refractionLOD = 1.0;
 uniform float clearSkin = 0.01;
+uniform bool refractOnEnter = true;
 
 uniform float normalDepth = 1.0;
 
@@ -136,6 +138,9 @@ void fragment() {
 		NORMAL = vNorm;
 		//ALBEDO = (vNorm * .5 + .5) * 1.0;
 		
+		if (refractOnEnter)
+			wFwd = refract(wFwd, wNorm, 1.0 / indexOfRefraction);
+		
         vec4 clipPos = (PROJECTION_MATRIX * VIEW_MATRIX * vec4(wHit, 1.0));
 		float depth = clipPos.z / clipPos.w;
 		DEPTH = depth;
@@ -162,7 +167,7 @@ void fragment() {
 		if (alpha < refractionAlphaCutoff) {
 			vec3 wBack = wHit + wFwd * thickness;
 			vec3 wBackNorm = mapNormal(wBack, t);
-			wBackNorm = refract(wFwd, -wBackNorm, .1);
+			wBackNorm = refract(wFwd, -wBackNorm, indexOfRefraction);
 			vec3 vBackNorm = (VIEW_MATRIX * vec4(wBackNorm, 0.0)).xyz;
 			vec2 uv = SCREEN_UV + vBackNorm.xy / max(vBackNorm.z, 0.1) * .01;
 			//ALBEDO = mix(texture(SCREEN_TEXTURE, uv).xyz, ALBEDO, alpha);
