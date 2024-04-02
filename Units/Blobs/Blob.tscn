@@ -104,66 +104,6 @@ transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.7252
 [node name="BlobBody20" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
 transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
 
-[node name="BlobBody81" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody82" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody83" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody84" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody85" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody86" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody87" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody88" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody89" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody90" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody91" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody92" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody93" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody94" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody95" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody96" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody97" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody98" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody99" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
-[node name="BlobBody100" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
-transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
-
 [node name="BlobBody21" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
 transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
 
@@ -344,13 +284,73 @@ transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.7252
 [node name="BlobBody80" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
 transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
 
+[node name="BlobBody81" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody82" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody83" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody84" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody85" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody86" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody87" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody88" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody89" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody90" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody91" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody92" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody93" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody94" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody95" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody96" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody97" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody98" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody99" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
+[node name="BlobBody100" parent="BlobMesh" instance=ExtResource("3_vtn7c")]
+transform = Transform3D(1, 3.79077e-09, -2.32831e-09, -3.6016e-09, 1, 0, -3.72529e-09, 1.39698e-09, 1, 2.38419e-07, 2.8939, -2.23517e-08)
+
 [node name="Test Env" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Test Env"]
 transform = Transform3D(-0.924732, -0.247671, 0.289014, 1.49012e-08, 0.759328, 0.650708, -0.380618, 0.601731, -0.702175, 4.47019, 5.50378, -5.67174)
 
 [node name="BlobCamMesh" type="MeshInstance3D" parent="Test Env/Camera3D"]
-transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 8.9366, 25.276, -16.6106)
+transform = Transform3D(0.999971, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 7.42909, 22.1218, -14.4013)
 top_level = true
 mesh = SubResource("SphereMesh_2aivb")
 surface_material_override/0 = ExtResource("1_vjc21")

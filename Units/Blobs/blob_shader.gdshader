@@ -156,8 +156,8 @@ void fragment() {
 		float iridescence = blobLuma * .8 + .01;
 		vec3 iridescenceCol = mix(triplanar(s0, wNorm, iridescenceNoise), triplanar(s02, wNorm, iridescenceNoise), 0.5);
 		iridescenceCol = saturate(iridescenceCol, iridescenceSaturation);
-		ALBEDO = mix(blobColor, iridescenceCol, iridescence * .25);
-		EMISSION = iridescenceCol * iridescenceCoef * iridescence * .5;
+		ALBEDO = mix(blobColor, iridescenceCol, iridescence * iridescenceCoef * .25);
+		//EMISSION = iridescenceCol * iridescenceCoef * iridescence * .5;
 		
 		vec3 s1 = wHit + vec3(.0, TIME * .1, .0);
 		vec3 s2 = wHit + vec3(TIME * .01, TIME * .05, .0);
