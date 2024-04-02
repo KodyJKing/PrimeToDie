@@ -10,7 +10,7 @@
 render_priority = 0
 shader = ExtResource("1_1fdy6")
 shader_parameter/blobColor = Color(0.278, 0.443, 0.012, 1)
-shader_parameter/attenuationConstant = 8.0
+shader_parameter/attenuationConstant = 2.0
 shader_parameter/alphaCoef = 1.0
 shader_parameter/minAlpha = 0.9
 shader_parameter/indexOfRefraction = 0.95
@@ -23,7 +23,7 @@ shader_parameter/iridescenceSaturation = 1.0
 shader_parameter/iridescenceCoef = 2.0
 shader_parameter/floorHeight = -0.01
 shader_parameter/floorStickiness = 0.5
-shader_parameter/blobStickiness = 0.75
+shader_parameter/blobStickiness = 0.9
 shader_parameter/numBlobs = 2
 shader_parameter/blobs = PackedFloat32Array(0, 0.5, 0, 1, 0, 1.5, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/noiseNorm = ExtResource("3_6vn1w")

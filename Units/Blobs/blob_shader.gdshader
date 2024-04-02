@@ -32,7 +32,7 @@ uniform float blobStickiness = 0.75;
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 
 uniform int numBlobs;
-uniform vec4[100] blobs;
+uniform vec4[200] blobs;
 
 const float LARGE = 9e+9;
 
